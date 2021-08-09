@@ -10,7 +10,8 @@ COPY . .
 
 EXPOSE 2999
 
-# Anonymous volume - managed by docker - on your local machine but you won't see where
-VOLUME ["/app/feedback"] 
-
 CMD ["node", "server.js"]
+
+
+# docker run -d -p 2999:2999 --rm --name feedback-app -v feedbackvol:/app/feedback feedbackapp:image
+# above adds a named volume that survives a container being stopped/removed.
