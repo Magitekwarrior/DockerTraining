@@ -13,7 +13,7 @@ EXPOSE 2999
 # this below could be used to create anonymous volume
 # VOLUME [ "app/node_modules" ]
 
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
 
 
 # docker run -d -p 2999:2999 --rm --name feedback-app -v feedbackvol:/app/feedback feedbackapp:image
