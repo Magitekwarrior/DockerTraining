@@ -67,18 +67,16 @@ app.get('/people', async (req, res) => {
   }
 });
 
-app.listen(3000);
-
 // NOTE: to use localhost (your machine) from containerized service, you must use: host.docker.internal instead of 'localhost'
-
-// mongoose.connect(
-//   'mongodb://localhost:27017/swfavorites',
-//   { useNewUrlParser: true },
-//   (err) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       app.listen(3000);
-//     }
-//   }
-// );
+// NOTE: when connecting to another container, use the container name when its part of the same network
+mongoose.connect(
+  'mongodb://mongodb:27017/swfavorites',
+  { useNewUrlParser: true },
+  (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      app.listen(3000);
+    }
+  }
+);
