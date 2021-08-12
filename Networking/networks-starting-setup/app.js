@@ -69,6 +69,8 @@ app.get('/people', async (req, res) => {
 
 app.listen(3000);
 
+// NOTE: to use localhost (your machine) from containerized service, you must use: host.docker.internal instead of 'localhost'
+
 // mongoose.connect(
 //   'mongodb://localhost:27017/swfavorites',
 //   { useNewUrlParser: true },
