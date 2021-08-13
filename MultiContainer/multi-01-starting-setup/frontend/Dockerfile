@@ -15,7 +15,7 @@ EXPOSE 3000
 CMD ["npm", "start"]
 
 # Containerise mongo db with persistent storage/ volume
-# docker run -d --rm -p 27017:27017 --name mongodb -v "$(pwd):/db" mongo
+# docker run -d --rm -p 27017:27017 --name mongodb -v "$(pwd)/db:/data/db" mongo
 
 # docker run -it --rm -d -p 3000:3000 reactapp:image
 
