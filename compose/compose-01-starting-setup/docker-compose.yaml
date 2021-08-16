@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  mongodb:
+    image: 'mongo'
+    volumes:
+      - data:/data/db
+    #environment: 
+      # - MONGO_INITDB_ROOT_USERNAME=max
+      #MONGO_INITDB_ROOT_USERNAME: max
+      #MONGO_INITDB_ROOT_PASSWORD: secret
+    env_file: 
+      - ./env/mongo.env
+    # networks:
+    #   - goals-net
+    # docker compose creates network automatically.
+  backend:
+    build: ./backend 
+    # build: 
+    #   context: ./backend
+    #   dockerfile: dockerfile
+    #   args: 
+    #     some-arg: 1
+    ports:
+      - '2999:2888'
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    env_file: 
+      - ./env/backend.env
+    depends_on: 
+      - mongodb #this indicates to docker-compose to spin up this `service` first
+  # frontend:
+  #   build: ./frontend
+volumes: #named volumes should be put here.
+  data:
+  logs:
