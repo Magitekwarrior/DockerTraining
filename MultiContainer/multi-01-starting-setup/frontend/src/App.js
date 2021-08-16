@@ -14,6 +14,10 @@ function App() {
       setIsLoading(true);
 
       try {
+        // const response = await fetch('http://localhost:2999/goals');
+        // Normally, on the same docker network, use the container name to resolve the fetch.
+        // BUT, react runs in browser... So, you MUST expose the port of the back-end so it can work locally
+        // because local browser doesn't know the container.
         const response = await fetch('http://localhost:2999/goals');
 
         const resData = await response.json();
