@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   mongodb:
+    container_name: 'mongodb-c'
     image: 'mongo'
     volumes:
       - data:/data/db
@@ -13,8 +14,11 @@ services:
     # networks:
     #   - goals-net
     # docker compose creates network automatically.
+    ports:
+      - '27017:27017'
   backend:
-    build: ./backend 
+    build: ./backend
+    container_name: 'backend-c'
     # build: 
     #   context: ./backend
     #   dockerfile: dockerfile
@@ -26,12 +30,25 @@ services:
       - logs:/app/logs
       - ./backend:/app
       - /app/node_modules
+    environment: 
+      - COMPOSE_DOCKER_CLI_BUILD=1
     env_file: 
       - ./env/backend.env
     depends_on: 
       - mongodb #this indicates to docker-compose to spin up this `service` first
-  # frontend:
-  #   build: ./frontend
+  frontend:
+    build: ./frontend
+    container_name: 'frontend-c'
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend/src:/app/src
+    environment: 
+      - COMPOSE_DOCKER_CLI_BUILD=1
+    stdin_open: true # for using --it interactive mode
+    tty: true # for using --it interactive mode
+    depends_on:
+      - backend
 volumes: #named volumes should be put here.
   data:
   logs:
