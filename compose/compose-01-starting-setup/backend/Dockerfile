@@ -13,6 +13,8 @@
 # OR.. create folder first and then alter permissions as part of the docker commands as below..
 FROM node
 
+USER node
+
 WORKDIR /app
 
 RUN mkdir /app/logs
@@ -23,7 +25,7 @@ RUN npm install
 
 COPY . .
 
-RUN chown -R node:node /app/logs
+RUN chown -R node:node /app/logs  && chmod 777 /app/logs
 
 EXPOSE 2888
 

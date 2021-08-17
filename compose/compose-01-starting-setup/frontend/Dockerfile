@@ -1,5 +1,7 @@
 FROM node
 
+USER node
+
 WORKDIR /app
 
 COPY package.json .
