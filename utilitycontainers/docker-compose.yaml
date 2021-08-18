@@ -6,3 +6,6 @@ services:
     tty: true
     volumes:
       - ./:/app
+
+# docker-compose command to run one service (including use of) & removing container after npm init
+# docker-compose run --rm npm init
